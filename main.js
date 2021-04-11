@@ -4,7 +4,7 @@ const $randomButtom = document.querySelector('.button');
 const player1 = {
     player: 1,
     name: 'Scorpion',
-    hp: 80,
+    hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: ['knife'],
     attack: function(){
@@ -15,7 +15,7 @@ const player1 = {
 const player2 = {
     player: 2,
     name: 'Liu Kang',
-    hp: 80,
+    hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/liukang.gif',
     weapon: ['knife'],
     attack: function(){
