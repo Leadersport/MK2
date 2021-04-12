@@ -38,14 +38,14 @@ function changeHP(player){
     player.hp -= random(20);
     $playerLife.style.width = player.hp + '%';
  
-    if( player.hp <= 0){
+    if(player.hp <= 0){
         player.hp = 0;
         $playerLife.style.width = player.hp + '%';
         $randomButtom.disabled = true;
         if (player.name === player1.name){
             $arena.appendChild(playerLose(player2.name));
         }else{
-            $arena.appendChild(playerLose(player2.name));
+            $arena.appendChild(playerLose(player1.name));
         }
     }
 }
