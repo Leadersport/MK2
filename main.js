@@ -236,10 +236,10 @@ function showReasult(){
     }  
 }
 
-const date = new Date();
-const startTime = `<span>${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}</span>`;
 
 function generateLogs(type, player1, player2, valueAttack, playerHP){
+    const date = new Date();
+    const startTime = `<span>${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}</span>`;
     
     let text = '';
     let el = ``;
@@ -249,14 +249,12 @@ function generateLogs(type, player1, player2, valueAttack, playerHP){
             el = `<p> ${text} </p>`;
             break;
         case 'hit':
-            console.log(type)
-            text = logs[type][random(type.length)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name);
-            el = `<p> ${text} -${valueAttack} ${playerHP}/100</p>`
+            text = logs[type][random(type.length)].replace('[playerKick]', `<span style='color:red'>${player1.name}</span>`).replace('[playerDefence]', `<span style='color:green'>${player2.name}</span>`);
+            el = `<p>${startTime} ${text} -${valueAttack} ${playerHP}/100</p>`
             break;
         case 'defence':
-            console.log(type)
-            text = logs[type][random(type.length)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name);
-            el = `<p> ${text} -${valueAttack} ${playerHP}/100</p>`
+            text = logs[type][random(type.length)].replace('[playerKick]', `<span style='color:red'>${player1.name}</span>`).replace('[playerDefence]', `<span style='color:yellow'>${player2.name}</span>`);
+            el = `<p>${startTime} ${text} ${playerHP}/100</p>`
             break;
         case 'end':
             text = logs[type][random(type.length)].replace('[playerWins]', player1.name).replace('[playerLose]', player2.name);
@@ -268,7 +266,6 @@ function generateLogs(type, player1, player2, valueAttack, playerHP){
             break;
     }
     $chat.insertAdjacentHTML('afterbegin', el)
-
 }
 
 generateLogs('start', player1, player2);
@@ -282,7 +279,6 @@ $formControl.addEventListener('submit', function(e){
 
     if (player.defence != enemy.hit){
         player1.controlHP(enemy.value);
-        console.log(enemy.value)
         generateLogs('hit', player2, player1, enemy.value, player1.hp);
         
     }else{
@@ -292,9 +288,7 @@ $formControl.addEventListener('submit', function(e){
 
     if(enemy.defence != player.hit){
         player2.controlHP(player.value);
-        if(player.value){
-            generateLogs('hit', player1, player2, player.value, player2.hp);
-        }
+        generateLogs('hit', player1, player2, player.value, player2.hp);
     }else{
         generateLogs('defence', player1, player2, 0, player2.hp);
 
@@ -312,5 +306,3 @@ function controlHP(randomNum){
 
 $arena.appendChild(createPlayer(player1));
 $arena.appendChild(createPlayer(player2));
-
-
